@@ -1,0 +1,41 @@
+---
+title: Configuration
+description: Overview of Configuration Files
+---
+
+# Configuration Overview
+
+SmartPOSv7 uses SQLite databases to handle various configurations and settings for both the GUI application and the POS server. Below is an overview of the SQLite files and their purposes.
+
+---
+
+## GUI Application Settings
+
+The GUI application stores its configuration in a dedicated SQLite database. This database contains the following tables:
+
+### Tables:
+1. **App Settings**: Stores general application settings such as theme, language, and user preferences.
+2. **Machine Settings**: Contains machine-specific configurations like hardware identifiers and system preferences.
+3. **Device Settings**: Manages connected device configurations, such as barcode scanners, printers, and cash drawers.
+4. **Extended Settings**: Stores additional settings for advanced customization and integrations.
+
+---
+
+## POS Server Settings
+
+The POS server uses a single SQLite database file named `ServerSetup.sqlite` to manage all server-related configurations.
+
+### SQLite File:
+- **ServerSetup.sqlite**: This file contains all the necessary configurations for the POS server.
+
+### Tables:
+1. **App Settings**: Stores server-specific application settings, such as server mode, logging preferences, and update configurations.
+2. **Machine Settings**: Contains server machine-specific settings, including network configurations and hardware details.
+
+---
+
+## Next Steps
+
+We will discuss each SQLite file, its properties, and schema in detail in the upcoming sections. This will include a breakdown of each table, its columns, and how the data is used within the application.
+
+For further assistance, refer to the [FAQ](./faq.mdx) or contact our support team.

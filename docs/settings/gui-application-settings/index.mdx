@@ -1,0 +1,192 @@
+---
+title: GUI Application Settings
+description: Overview for GUI Application Settings
+---
+
+# GUI Application Settings
+
+The **GUI Application Settings** are stored in an SQLite database and are used to configure various aspects of the SmartPOSv7 application. Below is a detailed explanation of the settings, their possible values, and their use cases.
+
+---
+
+## Configuration Properties
+
+### 1. **Tax_Enable**
+- **Value**: `false` (in example)
+- **Description**: Enables or disables tax calculations in the application.
+- **Use Case**: Currently disabled (`false`) indicating no tax calculations are being performed.
+
+### 2. **ActLicenseMacId**
+- **Value**: `12:74:DE:0A:88:4F`
+- **Description**: MAC address used for license activation and validation.
+- **Use Case**: Unique hardware identifier for licensing purposes.
+
+### 3. **ApplicationLanguage**
+- **Value**: `English`
+- **Description**: Sets the default interface language.
+- **Use Case**: Ensures all system messages and interface elements appear in English.
+
+### 4. **LicenseWebAPI**
+- **Value**: `http://web.mycomsys.com/LicenseAPI_v2/LIVE/#type`
+- **Description**: Endpoint for license management web service.
+- **Use Case**: Used for license validation and activation requests.
+
+### 5. **LoyaltyWebApi**
+- **Value**: `http://31.24.227.37/Loyalty_API/DEVP/V3/#type`
+- **Description**: Loyalty program integration endpoint.
+- **Use Case**: Connects to loyalty program services (currently set to development environment).
+
+### 6. **ClientId**
+- **Value**: `20130`
+- **Description**: Unique client identifier.
+- **Use Case**: Used in API requests to identify the client account.
+
+### 7. **WebApi**
+- **Value**: `http://web.mycomsys.com/posapi_json_v3/api/#type?cid=20130&lcode=001`
+- **Description**: Main POS API endpoint with client parameters.
+- **Use Case**: All POS operations communicate through this endpoint.
+
+### 8. **PosID**
+- **Value**: `1`
+- **Description**: Terminal identifier.
+- **Use Case**: Distinguishes between multiple POS terminals at location `001`.
+
+### 9. **EodFilePath**
+- **Value**: `C:/`
+- **Description**: Storage location for End-of-Day reports.
+- **Use Case**: Reports will be saved to the root of C: drive.
+
+### 10. **CompanyName**
+- **Value**: `MYCOM SMARTPOS`
+- **Description**: Business name for display purposes.
+- **Use Case**: Appears on receipts and system headers.
+
+---
+
+## Advanced Settings
+
+### 1. **VoiceSettings**
+- **Value**: 
+```json
+{
+  "currency": {
+    "afterDecimal": "fills",
+    "beforeDecimal": "Dihrams"
+  },
+  "enable": true,
+  "voiceEvents": {
+    "on_bill_cancelled": ["Bill Cancelled"],
+    "on_bill_holded": ["{BILL_NO} {AMOUNT} Bill Hold Successfully"],
+    "on_bill_settled": ["Thank you for visit , come again {BILL_NO}"]
+  }
+}
+```
+- **Description**: Configures voice feedback for transactions.
+- **Use Case**: Provides audible confirmation for key actions with template-based messages.
+
+### 2. **SecondDisplay**
+- **Value**: 
+```json
+{
+  "Duration": 3000,
+  "Height": 800,
+  "ItemListHeight": 400,
+  "ItemListWidth": 400,
+  "Width": 800
+}
+```
+- **Description**: Secondary display configuration.
+- **Use Case**: Controls layout and timing for customer-facing displays.
+
+### 3. **TransactionColors**
+- **Value**: 
+```json
+{
+  "CC": "indigo",
+  "CN": "purple",
+  "CR": "pink",
+  "DISC": "green"
+}
+```
+- **Description**: Color coding for transaction types.
+- **Use Case**: Visual differentiation of payment methods in the UI.
+
+---
+
+## Hardware Configuration
+
+### 1. **CustDisplayPort**
+- **Value**: `COM10`
+- **Description**: Serial port for customer display.
+- **Use Case**: Connects to external customer display hardware.
+
+### 2. **EcrCom**
+- **Value**: `COM8`
+- **Description**: Serial port for Electronic Cash Register.
+- **Use Case**: Currently not connected (`EcrConnected`: `false`).
+
+### 3. **VendorCode**
+- **Value**: `mashreq`
+- **Description**: Payment processor identifier.
+- **Use Case**: Specifies payment gateway integration.
+
+---
+
+## Business Rules
+
+### 1. **MaxQty**
+- **Value**: `999.000`
+- **Description**: Maximum allowed quantity per item.
+- **Use Case**: Prevents unrealistic order quantities.
+
+### 2. **PriceDecimal**
+- **Value**: `2`
+- **Description**: Number of decimal places for prices.
+- **Use Case**: Ensures consistent price formatting (e.g., 10.50 AED).
+
+### 3. **ServiceChargeEnable**
+- **Value**: `No`
+- **Description**: Enables service charges.
+- **Use Case**: Currently disabled for this location.
+
+### 4. **RefundOption**
+- **Value**: `BOTH`
+- **Description**: Allowed refund methods.
+- **Use Case**: Permits both cash and credit refunds.
+
+---
+
+## Security Settings
+
+### 1. **UserAccessValidation**
+- **Value**: `Yes`
+- **Description**: Requires user authentication.
+- **Use Case**: Ensures only authorized staff can access sensitive functions.
+
+### 2. **ShiftValidation**
+- **Value**: `Yes`
+- **Description**: Enforces shift management.
+- **Use Case**: Requires proper shift opening/closing procedures.
+
+### 3. **AutomaticLogout**
+- **Value**: `true`
+- **Description**: Automatic session timeout.
+- **Use Case**: Activates after `IdleTimeoutInterval` (10 minutes) of inactivity.
+
+---
+
+## Localization Settings
+
+### 1. **currencyCode**
+- **Value**: `AED`
+- **Description**: Default currency (UAE Dirham).
+- **Use Case**: All monetary values use this currency.
+
+
+
+### Multi Language Settings
+
+### 1. **Language**
+- **Value**: `en`
+- **Description**: Based on Langauge iso code.
+- **Use Case**: Based on the UI will change for multiple lanaguge support.

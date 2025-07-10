@@ -1,0 +1,156 @@
+{
+  "name": "Smartpos7",
+  "description": "Smartpos7 Documentation",
+  "sidebar": [
+  {
+    "group": "Getting Started",
+    "pages": [
+      {
+        "title": "Getting Started",
+        "href": "/",
+        "icon": "rocket"
+      },
+      {
+        "title": "Installation",
+        "href": "/installation",
+        "icon": "download"
+      },
+      {
+        "title": "Configuration",
+        "href": "/configuration",
+        "icon": "cog"
+      },
+      {
+      "group": "POS Login & Shift Flow",
+      "pages": [
+        {
+          "title": "Application Login",
+          "href": "/features/pos-login-and-shift/application-login",
+          "icon": "key"
+        },
+        {
+          "title": "Shift Status",
+          "href": "/features/pos-login-and-shift/shift-status",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Opening a Shift",
+          "href": "/features/pos-login-and-shift/opening-shift",
+          "icon": "clock"
+        },
+        {
+          "title": "Billing Access",
+          "href": "/features/pos-login-and-shift/billing-access",
+          "icon": "shopping-cart"
+        },
+        {
+          "title": "Server Indicator",
+          "href": "/features/pos-login-and-shift/server-indicator",
+          "icon": "pause-circle"
+        }
+      ]
+    },
+      {
+        "group": "Settings",
+        "pages": [
+          {
+            "title": "GUI Application Settings",
+            "href": "/settings/gui-application-settings",
+            "icon": "cog"
+          },
+          {
+            "title": "POS Server Settings",
+            "href": "/settings/pos-server-settings",
+            "icon": "cog"
+          },
+          {
+            "title": "Customer Display Settings",
+            "href": "/settings/customer-display-settings",
+            "icon": "cog"
+          },
+          {
+            "title": "Printer Settings",
+            "href": "/settings/printer-settings",
+            "icon": "cog"
+          },
+          {
+            "title": "Second Display Settings",
+            "href": "/settings/second-display-settings",
+            "icon": "cog"
+          },
+          {
+            "title": "Cash Drawer Settings",
+            "href": "/settings/cash-drawer-settings",
+            "icon": "cog"
+          },
+          {
+            "title": "Scalable Barcode Settings",
+            "href": "/settings/scalable-barcode-settings",
+            "icon": "cog"
+          },
+          {
+            "title": "Voice Settings",
+            "href": "/settings/voice-settings",
+            "icon": "voice"
+          },
+          {
+            "title": "User Settings",
+            "href": "/settings/user-settings",
+            "icon": "cog"
+          }
+        ]
+      },
+    {
+  "group": "Action's",
+  "pages": [
+    {
+      "title": "Void Item from Bill",
+      "href": "/features/actions/void",
+      "icon": "trash-2"
+    },
+    {
+      "title": "Cancel Entire Bill",
+      "href": "/features/actions/cancel",
+      "icon": "x-octagon"
+    },
+    {
+      "title": "With Bill Credit Note",
+      "href": "/features/actions/credit-note-with-bill",
+      "icon": "file-text"
+    },
+    {
+      "title": "With Bill Refund",
+      "href": "/features/actions/refund-with-bill",
+      "icon": "rotate-ccw"
+    },
+    {
+      "title": "Without Bill Refund",
+      "href": "/features/actions/refund-without-bill",
+      "icon": "rotate-ccw"
+    },
+    {
+      "title": "Hold Bill",
+      "href": "/features/actions/hold",
+      "icon": "pause-circle"
+    },
+    {
+      "title": "LookUp Bills",
+      "href": "/features/actions/lookup",
+      "icon": "search"
+    },
+    {
+      "title": "Price Checker",
+      "href": "/features/actions/price-checker",
+      "icon": "tag"
+    },
+    {
+      "title": "Repeat & Update Item",
+      "href": "/features/actions/repeat-and-update-item",
+      "icon": "edit-3"
+    }
+  ]
+}
+    ]
+  }
+]
+}
