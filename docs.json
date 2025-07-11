@@ -100,7 +100,7 @@
           }
         ]
       },
-    {
+{
   "group": "Action's",
   "pages": [
     {
@@ -147,9 +147,45 @@
       "title": "Repeat & Update Item",
       "href": "/features/actions/repeat-and-update-item",
       "icon": "edit-3"
+    },
+    {
+      "title": "Item Search",
+      "href": "/features/actions/item-search",
+      "icon": "search"
+    },
+    {
+      "title": "Without Bill Credit Note",
+      "href": "/features/actions/credit-note-without-bill",
+      "icon": "file-minus"
+    },
+    {
+      "title": "Foreign Exchange Payment",
+      "href": "/features/actions/foreign-exchange",
+      "icon": "globe"
+    },
+    {
+      "title": "Credit Card Payment",
+      "href": "/features/actions/credit-card",
+      "icon": "credit-card"
+    },
+    {
+      "title": "Cash Payment",
+      "href": "/features/actions/cash",
+      "icon": "dollar-sign"
+    },
+    {
+      "title": "Discount",
+      "href": "/features/actions/discount",
+      "icon": "percent"
+    },
+    {
+      "title": "Credit Customer Billing",
+      "href": "/features/actions/credit-customer",
+      "icon": "users"
     }
   ]
 }
+
     ]
   }
 ]
