@@ -1,0 +1,52 @@
+---
+title: ServerSetup Configuration
+description: Minimum ServerSetup.sqlite settings to start selling
+---
+
+# ServerSetup Configuration
+
+These are the **minimum settings** needed in `ServerSetup.sqlite` to start making sales.
+
+## 📋 Required Settings for Sample Sales
+
+| Setting | Value | Description |
+|---------|-------|-------------|
+| **ClientId** | `20130` | Your company identification number |
+| **loc_id** | `001` | Your store location code |
+| **DriverType** | `QSQLITE` | Database type (choose QSQLITE for simple setup) |
+| **ServerType** | `RETAIL` | Application type (RETAIL for stores, RESTPOS for restaurants) |
+
+## ⚙️ Optional but Recommended Settings
+
+| Setting | Default Value | Purpose |
+|---------|---------------|---------|
+| **CoutrCloseDay** | `1` | Day counter resets (1 = daily) |
+| **CoutrCloseHour** | `1` | Time counter resets (1 = 1:00 AM) |
+| **CoutrCloseMin** | `0` | Minutes part of reset time |
+| **ReportWidth** | `43` | Receipt printer width in characters |
+
+## 🔧 How to Configure
+
+1. Open your Smartposv7 application folder
+2. Find `ServerSetup.sqlite` file
+3. Set these 4 required settings:
+   ```ini
+   ClientId=20130
+   loc_id=001
+   DriverType=QSQLITE
+   ServerType=RETAIL
+   ```
+4. Save and restart Smartposv7
+
+## ❓ Frequently Asked Questions
+
+**Q: What if I need QODBC instead of QSQLITE?**  
+A: Contact support team for database setup assistance.
+
+**Q: Where do I get my actual ClientId and loc_id?**  
+A: These are provided by your system administrator or support team.
+
+**Q: What about other ServerSetup settings?**  
+A: They are for advanced features. Start with these basics first.
+
+---

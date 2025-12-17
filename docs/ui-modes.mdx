@@ -1,0 +1,263 @@
+---
+title: UI Mode Configuration Guide
+description: How to set up different UI modes in Smartposv7
+---
+
+# UI Mode Configuration Guide
+
+Smartposv7 supports multiple UI modes for different retail scenarios. Each mode requires specific settings in **two configuration files**.
+
+## 📋 Configuration Files Overview
+
+| File | Purpose | Location |
+|------|---------|----------|
+| **MachineSetup.sqlite** | Controls **interface appearance** and **user experience** | Same folder as Smartposv7.exe |
+| **ServerSetup.sqlite** | Controls **server type** and **backend behavior** | Same folder as Smartposv7.exe |
+
+## 🎯 How to Change UI Mode
+
+To switch between UI modes, you must **update both files**:
+
+1. **Open** `MachineSetup.sqlite` → Set `ApplicationType`, `SubApplicationType`, `UIMode`
+2. **Open** `ServerSetup.sqlite` → Set `ServerType`
+3. **Restart** Smartposv7 application
+
+## 📱 Available UI Modes
+
+Here are all supported UI modes and their configurations:
+
+<Tabs groupId="ui-modes">
+<TabItem label="RESTPOS (Restaurant)" value="restpos">
+
+### Restaurant POS System
+For sit-down restaurants with waiter service.
+
+**📁 MachineSetup.sqlite Settings:**
+```ini
+ApplicationType = RESTPOS
+SubApplicationType = (Not needed - leave empty)
+UIMode = RESTPOS
+```
+
+**🖥️ ServerSetup.sqlite Settings:**
+```ini
+ServerType = RESTPOS
+```
+
+**🍽️ Best For:**
+- Table service restaurants
+- Waiter-order systems
+- Course-based meal service
+
+**🎯 Features:**
+- Table management
+- Course sequencing
+- Split billing
+- Kitchen order tickets
+
+</TabItem>
+<TabItem label="RESTPOS Self-Checkout" value="restpos-self">
+
+### Restaurant Self-Checkout
+For fast-food or self-service restaurants.
+
+**📁 MachineSetup.sqlite Settings:**
+```ini
+ApplicationType = RESTPOS
+SubApplicationType = (Not needed - leave empty)
+UIMode = RESTRAURANT-SELF-CHECKOUT
+```
+
+**🖥️ ServerSetup.sqlite Settings:**
+```ini
+ServerType = RESTPOS
+```
+
+**🍔 Best For:**
+- Fast food restaurants
+- Food courts
+- Self-service kiosks
+- Takeaway counters
+
+**🎯 Features:**
+- Quick item selection
+- Payment at kiosk
+- Order number system
+- Pickup counter display
+
+</TabItem>
+<TabItem label="SMARTPOSV7 (Retail)" value="smartposv7">
+
+### SMARTPOSV7 Retail POS
+Modern retail checkout system (recommended).
+
+**📁 MachineSetup.sqlite Settings:**
+```ini
+ApplicationType = RETAIL-POS
+SubApplicationType = SMARTPOSV7
+UIMode = RETAIL-POS
+```
+
+**🖥️ ServerSetup.sqlite Settings:**
+```ini
+ServerType = RETAIL
+```
+
+**🛒 Best For:**
+- Retail stores
+- Supermarkets
+- Clothing stores
+- Electronics shops
+
+**🎯 Features:**
+- Modern interface
+- Touch screen support
+- Advanced inventory
+- Customer management
+
+</TabItem>
+<TabItem label="SMARTPOSV5 (Legacy)" value="smartposv5">
+
+### SMARTPOSV5 Retail POS
+Legacy retail system for backward compatibility.
+
+**📁 MachineSetup.sqlite Settings:**
+```ini
+ApplicationType = RETAIL-POS
+SubApplicationType = SMARTPOSV5
+UIMode = RETAIL-POS
+```
+
+**🖥️ ServerSetup.sqlite Settings:**
+```ini
+ServerType = RETAIL
+```
+
+**🏪 Best For:**
+- Existing SMARTPOSV5 users
+- Systems requiring backward compatibility
+- Hardware with older requirements
+
+**🎯 Features:**
+- Same as V5 system
+- Familiar interface
+- Existing workflows
+
+</TabItem>
+<TabItem label="SMARTPOSV5 Self-Checkout" value="smartposv5-self">
+
+### SMARTPOSV5 Self-Checkout
+Self-service checkout for legacy systems.
+
+**📁 MachineSetup.sqlite Settings:**
+```ini
+ApplicationType = RETAIL-POS
+SubApplicationType = SMARTPOSV5
+UIMode = RETAIL-SELF-CHECKOUT
+```
+
+**🖥️ ServerSetup.sqlite Settings:**
+```ini
+ServerType = RETAIL
+```
+
+**🛍️ Best For:**
+- Supermarkets with V5 system
+- Self-checkout upgrades
+- Existing V5 infrastructure
+
+**🎯 Features:**
+- Self-service interface
+- Barcode scanning
+- Cash/card payment
+- Bagging area
+
+</TabItem>
+<TabItem label="SMARTPOSV7 Self-Checkout" value="smartposv7-self">
+
+### SMARTPOSV7 Self-Checkout
+Modern self-checkout system.
+
+**📁 MachineSetup.sqlite Settings:**
+```ini
+ApplicationType = RETAIL-POS
+SubApplicationType = SMARTPOSV7
+UIMode = RETAIL-SELF-CHECKOUT
+```
+
+**🖥️ ServerSetup.sqlite Settings:**
+```ini
+ServerType = RETAIL
+```
+
+**🏪 Best For:**
+- Modern supermarkets
+- Retail self-service
+- Touch screen kiosks
+- Reduced staff needs
+
+**🎯 Features:**
+- Modern touch interface
+- Guided scanning
+- Multiple payment options
+- Security features
+
+</TabItem>
+</Tabs>
+
+## 📝 Configuration Examples
+
+### Example 1: Setting up Restaurant POS
+```ini
+# MachineSetup.sqlite
+ApplicationType = RESTPOS
+UIMode = RESTPOS
+
+# ServerSetup.sqlite  
+ServerType = RESTPOS
+```
+
+### Example 2: Setting up Retail Self-Checkout
+```ini
+# MachineSetup.sqlite
+ApplicationType = RETAIL-POS
+SubApplicationType = SMARTPOSV7
+UIMode = RETAIL-SELF-CHECKOUT
+
+# ServerSetup.sqlite
+ServerType = RETAIL
+```
+
+## 🔄 Switching Between Modes
+
+**Important**: Always restart Smartposv7 after changing UI mode settings.
+
+1. **Close** Smartposv7 completely
+2. **Edit** both configuration files
+3. **Save** changes
+4. **Restart** Smartposv7
+5. **Verify** new UI mode is active
+
+## ❓ Common Questions
+
+**Q: Can I switch modes without reinstalling?**  
+A: Yes! Just edit the two configuration files and restart.
+
+**Q: Which mode should I choose?**  
+A: 
+- **RESTPOS**: Restaurants with waiters
+- **RETAIL-POS**: Retail stores with staff
+- **SELF-CHECKOUT**: Customer-operated systems
+
+**Q: What about mobile/tablet mode?**  
+A: Mobile mode is **automatic** when running on mobile devices. No setup needed.
+
+**Q: Do I need different ServerSetup for each mode?**  
+A: Only `ServerType` changes:
+- `RESTPOS` for restaurant modes
+- `RETAIL` for retail modes
+
+---
+
+**Ready to start?** [Launch Smartposv7 →](/getting-started)
+*Configuration complete. You can now start using Smartposv7.*

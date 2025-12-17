@@ -1,0 +1,127 @@
+---
+title: Getting Started
+description: Launch Smartposv7 for the first time
+---
+
+# Getting Started
+
+## 🚀 Launching Smartposv7
+
+### Option 1: Double-Click EXE (Simple)
+1. Go to your Smartposv7 folder
+2. Double-click `Smartposv7.exe`
+3. Wait for application to start
+
+### Option 2: Create Desktop Shortcut (Recommended)
+
+**Using Command Prompt:**
+```cmd
+:: Open Command Prompt as Administrator
+:: Replace path with your actual Smartposv7 location
+cd C:\Users\YourName\Documents\Smartposv7\
+
+:: Create shortcut on Desktop
+powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\Smartposv7.lnk');$s.TargetPath='C:\Users\YourName\Documents\Smartposv7\Smartposv7.exe';$s.Save()"
+```
+
+**Using GUI (Manual):**
+1. Right-click `Smartposv7.exe`
+2. Select "Create shortcut"
+3. Drag shortcut to Desktop
+
+## ⏳ First Launch Waiting Time
+
+**Important**: The **first time** you launch Smartposv7, it may take **1-2 minutes** to start.
+
+**Why this happens:**
+![Description](/assets/images/login_flow.svg)
+
+- **Windows Security** scans new applications
+- **Internal server** needs time to initialize
+- **Database connections** are established
+- **Subsequent launches** will be faster (10-20 seconds)
+
+> **⚠️ Note**: Do NOT close the application during first launch. Wait for the login screen.
+
+## 🔍 Verifying Connection Settings
+
+Before login, check if your connection is properly configured in `MachineSetup.sqlite`:
+
+| Setting | Value | Purpose |
+|---------|-------|---------|
+| **ConnectionType** | `local` or `remote` | How app connects to server |
+| **PosServerIP** | `localhost` or IP address | Server address |
+| **PosServerPort** | `9002` | Server port number |
+| **ServerIP** | `localhost` or IP address | Alternative server address |
+| **ServerPort** | `9003` | Alternative server port |
+
+**Example Configuration:**
+```ini
+# For standalone installation (server inside app)
+ConnectionType = local
+PosServerIP = localhost
+PosServerPort = 9002
+
+# For central server installation
+ConnectionType = remote  
+PosServerIP = 192.168.1.100  # Your server IP
+PosServerPort = 9002
+```
+
+## 🟢 Server Status Indicator
+
+Look at the **top-right corner** of the login screen:
+
+![Login Screen Sample](https://example.com/smartposv7-login-sample.png)
+
+**Status Colors:**
+- **🟢 Green**: Server connected and ready
+- **🔴 Red**: Server not connected
+- **🟡 Yellow**: Connecting in progress
+
+### If status is RED:
+1. Check `MachineSetup.sqlite` connection settings
+2. Verify server is running
+3. Check firewall allows ports 9002/9003
+4. Restart application
+
+## 👤 Login Credentials
+
+When status is **GREEN**, use these default credentials:
+
+| Field | Value | Notes |
+|-------|-------|-------|
+| **Username** | `demo` | Case sensitive |
+| **Password** | `demo` | Case sensitive |
+
+**Login Steps:**
+1. Enter `demo` in Username field
+2. Enter `demo` in Password field  
+3. Click **Login** button
+4. Wait for transition to Home Screen
+
+## 🔧 Troubleshooting First Launch
+
+**Problem**: Application takes too long to start
+- **Solution**: Wait 2-3 minutes for first-time setup
+- **Solution**: Add exception in Windows Defender
+
+**Problem**: Red status indicator
+- **Solution**: Check `ConnectionType` in MachineSetup.sqlite
+- **Solution**: Verify ports 9002/9003 are not blocked
+
+**Problem**: Login fails
+- **Solution**: Ensure username/password are exactly `demo`
+- **Solution**: Check database files exist in app folder
+
+## ✅ What's Next
+
+After successful login, you'll see the **Home Screen** where you can:
+- Start new sales
+- Manage inventory
+- View reports
+- Configure settings
+
+---
+
+**Ready to explore?** [Home Screen Overview →](/home)

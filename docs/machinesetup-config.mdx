@@ -1,0 +1,73 @@
+---
+title: MachineSetup Configuration  
+description: MachineSetup.sqlite settings to start selling
+---
+
+# MachineSetup Configuration
+
+These are the **settings** needed in `MachineSetup.sqlite` to start making sales.
+
+## 📋 Required Settings for Sample Sales
+
+| Setting | Value | Description |
+|---------|-------|-------------|
+| **Tax_Enable** | `true` | Enable tax calculation on sales |
+| **PosID** | `12` | Your POS terminal/checkout number |
+| **UIMode** | `RETAIL-POS` | Interface mode for normal checkout |
+
+## ⚙️ Optional but Recommended Settings
+
+| Setting | Default Value | Purpose |
+|---------|---------------|---------|
+| **ClientCode** | `21103` | Your client code for identification |
+| **loc_id** | `001` | Should match ServerSetup's loc_id |
+| **ApplicationType** | `RETAIL-POS` | Main application type |
+
+## 🖥️ UI Mode Options
+
+Choose ONE `UIMode` that matches your setup:
+
+| UIMode | Best For | Description |
+|--------|----------|-------------|
+| **RETAIL-POS** | Normal stores | Staff-operated checkout |
+| **RETAIL-SELF-CHECKOUT** | Supermarkets | Customer self-checkout |
+| **RESTPOS** | Restaurants | Restaurant ordering system |
+| **RESTRAURANT-SELF-CHECKOUT** | Fast food | Customer self-ordering |
+
+## 🔧 How to Configure
+
+1. Open your Smartposv7 application folder
+2. Find `MachineSetup.sqlite` file
+3. Set these 3 required settings:
+   ```ini
+   Tax_Enable=true
+   PosID=12
+   UIMode=RETAIL-POS
+   ```
+4. Save and restart Smartposv7
+
+## 🎯 Quick Start Recommendation
+
+For testing and first sales, use:
+```
+Tax_Enable=true
+PosID=1
+UIMode=RETAIL-POS
+ClientCode=21103
+loc_id=001
+```
+
+## ❓ Frequently Asked Questions
+
+**Q: What PosID should I use?**  
+A: Start with `1` for single terminal, or unique numbers for multiple terminals.
+
+**Q: Which UIMode for mobile/tablet?**  
+A: Mobile mode is automatic - no setup needed.
+
+**Q: What about tax master settings?**  
+A: Tax calculation works with basic `Tax_Enable=true`. Advanced tax setup comes later.
+
+---
+
+**⚠️ Note**: This is the **minimum setup** for sample sales. Complete configuration will be added later.
