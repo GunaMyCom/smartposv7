@@ -1,0 +1,198 @@
+---
+title: Initial Setup Guide
+description: First-time configuration for Smartposv7
+---
+
+# Initial Setup Guide
+
+Welcome to Smartposv7! This guide will help you configure the application for the first time.
+
+## 📁 Where Files Are Created
+
+When you first run Smartposv7, it automatically creates necessary files:
+
+```plaintext
+Your Application Folder/
+├── Smartposv7.exe           # Main application
+├── settings.ini            # Tells app where to look for databases
+├── MachineSetup.sqlite     # GUI and display settings (colors, layout)
+├── ServerSetup.sqlite      # Server and connection settings
+└── (other .sqlite files)   # For other features (we'll add later)
+```
+
+> **💡 Important**: All files are created in the **same folder** where `Smartposv7.exe` is located.
+
+## ⚙️ How the Application Finds Database Files
+
+The application reads `settings.ini` to know where to look:
+
+```ini
+# settings.ini content
+[General]
+appPath=C:/Users/YourName/Documents/Smartposv7/
+```
+
+**Translation**: "Look for my database files in this folder: `C:/Users/YourName/Documents/Smartposv7/`"
+
+## 🏗️ Two Ways to Use Smartposv7
+
+Smartposv7 works in two different setups. Choose **ONE**:
+
+### **Option 1: Standalone Mode (Simple)**
+```mermaid
+graph LR
+    A[Single Computer] --> B[Smartposv7 App]
+    B --> C[Built-in Server]
+    B --> D[Sales Data]
+```
+- **For**: One store, one computer
+- **Server is INSIDE** the application
+- **No extra installation** needed
+- **Good for**: Small shops, testing
+
+### **Option 2: Central Server Mode (Multiple POS)**
+```mermaid
+graph TB
+    S[Central Server] --> C1[POS Computer 1]
+    S --> C2[POS Computer 2]
+    S --> C3[POS Computer 3]
+    C1 --> D1[Sales Data]
+    C2 --> D2[Sales Data]
+    C3 --> D3[Sales Data]
+```
+- **For**: Multiple stores or multiple checkout counters
+- **Separate POS Server** installation needed
+- **Multiple computers** connect to one server
+- **Good for**: Supermarkets, chain stores
+
+> **📥 Download POS Server**: [https://example.com/pos-server.zip](https://example.com/pos-server.zip)  
+> (Same installation steps as Smartposv7)
+
+## 📋 Complete Configuration Settings
+
+To start selling, configure these TWO files:
+
+<Tabs groupId="config-files">
+<TabItem label="ServerSetup.sqlite" value="serversetup">
+
+### Server & Connection Settings
+(These control how the application talks to servers and databases)
+
+**🔧 Basic Settings for First Sale:**
+- `ClientId` = `20130` (Your company ID)
+- `loc_id` = `001` (Your store location ID)
+- `DriverType` = `QSQLITE` (Simple database) or `QODBC` (Advanced)
+- `ServerType` = `RETAIL` (For retail stores) or `RESTPOS` (For restaurants)
+
+**🕐 Counter Closing Time (End of Day):**
+- `CoutrCloseDay` = `1`
+- `CoutrCloseHour` = `1` (1:00 AM)
+- `CoutrCloseMin` = `0`
+
+**☁️ Sales Upload to Cloud:**
+- `SalesUploadPort` = `8814/WEBCLOUD_TESTSRV/api/v1/opm/SalesUploadToOpm`
+- `SalesUploadServerIP` = `https://web.mycomsys.com`
+- `SalesUploadSink` = `cloud-erp` (Options: `cloud-erp`, `inv-1.8`, `inv-v4`)
+
+**📊 Dashboard Sync:**
+- `DashboardSync` = `true`
+- `DashboardSyncUrl` = `https://web2.mycomsys.com:8801/syncapi/posbilldata`
+
+**💰 Tax & Receipt Settings:**
+- `taxable_no` = "Series for tax receipt numbers"
+- `nonTaxable_no` = "Series for non-tax receipt numbers"
+- `ReportWidth` = `43` (Characters per line on receipt)
+
+**🔐 Advanced Database (QODBC Only):**
+- `PosDbName` = Your database name
+- `PosPassword` = Your database password
+- `PosServerName` = Your server name
+- `PosUserId` = Your user ID
+- `PosServerPort` = `9002`
+
+**📥 Master Data Download:**
+- `MasterDownloadFrom` = `cloud-erp` (Options: `cloud-erp`, `inv-1.8`, `inv-v4`)
+- `BackOfficeDownloadUrl` = "" (Leave empty for default)
+
+**🔑 Authorization (Contact Support):**
+- `NewOpmAuth` = (Get from support team)
+
+---
+
+**[View Complete ServerSetup Guide →](/serversetup-config)**
+
+</TabItem>
+<TabItem label="MachineSetup.sqlite" value="machinesetup">
+
+### Display & Interface Settings  
+(These control what you see on screen)
+
+**🛒 Basic Sales Settings:**
+- `Tax_Enable` = `true` (Enable tax calculation)
+- `PosID` = `12` (Your POS terminal number)
+- `ClientCode` = `21103` (Your client code)
+- `loc_id` = `001` (Your store location ID)
+
+**🖥️ Interface Mode:**
+- `ApplicationType` = `RETAIL-POS` (Options: `RETAIL-POS`, `RESTPOS`)
+- `SubApplicationType` = `SMARTPOSV7` (Options: `SMARTPOSV5`, `SMARTPOSV7`)
+- `UIMode` = `RETAIL-POS` (Options: `RETAIL-POS`, `RETAIL-SELF-CHECKOUT`, `RESTPOS`, `RESTRAURANT-SELF-CHECKOUT`)
+
+**📦 Download Product Data:**
+- `DownloadMasters` = `["group_master","item_master","price_mast","subgroup_master","tax_master"]`
+
+**📱 Mobile POS:**
+- Automatically works based on device - no extra setup needed
+
+**🔄 Compatibility:**
+- `SMARTPOSV5` support for older systems
+- `SMARTPOSV7` for current features
+
+---
+
+**[View Complete MachineSetup Guide →](/machinesetup-config)**
+
+</TabItem>
+</Tabs>
+
+## 🚀 Quick Start - Sample Sales Setup
+
+Follow these steps to set up for your first sale:
+
+1. **Run Smartposv7.exe** once (creates all files automatically)
+2. **Edit ServerSetup.sqlite** with these minimum settings:
+   - `ClientId` = `20130`
+   - `loc_id` = `001`
+   - `DriverType` = `QSQLITE`
+   - `ServerType` = `RETAIL`
+3. **Edit MachineSetup.sqlite** with these minimum settings:
+   - `Tax_Enable` = `true`
+   - `PosID` = `12`
+   - `UIMode` = `RETAIL-POS`
+4. **Restart Smartposv7**
+5. **Start selling!**
+
+## 🤔 Still Confused?
+
+**Think of it like this:**
+- **ServerSetup.sqlite** = "How to connect" (like Wi-Fi password + server addresses)
+- **MachineSetup.sqlite** = "How to look" (like phone display settings + store setup)
+- **Together** = Working POS system ready for sales
+
+## 📞 Need Help?
+
+If any setting is unclear:
+1. Start with the **minimum settings** above
+2. Check the detailed guides for each file
+3. **Contact support team** for:
+   - `NewOpmAuth` authorization key
+   - Advanced database setup
+   - Cloud configuration
+
+---
+
+**Next Steps:**
+- [Complete ServerSetup Configuration →](/serversetup-config)
+- [Complete MachineSetup Configuration →](/machinesetup-config)
+- [UI Modes Explained →](/ui-modes)
+```
