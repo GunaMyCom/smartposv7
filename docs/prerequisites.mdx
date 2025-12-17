@@ -1,55 +1,66 @@
-
----
-
-## **3. Prerequisites (`docs/prerequisites.mdx`)**
-
-```markdown
 ---
 title: Prerequisites
-description: System requirements and pre-installation checklist
+description: System requirements before installing Smartposv7
 ---
 
-# Prerequisites for Smartposv7
+# Prerequisites
 
-Before installing Smartposv7, ensure your system meets all requirements. This checklist will help you prepare for a successful installation.
+Before installing Smartposv7, ensure your system meets these requirements.
 
-## System Requirements
+## Operating System
 
-### Minimum Hardware
+- **Windows 7** or newer version
+- 64-bit operating system recommended
 
-| Component | Minimum | Recommended |
-|-----------|---------|-------------|
-| **Processor** | 2-core x64 CPU | 4-core Intel i5/Ryzen 5 |
-| **RAM** | 4 GB DDR3 | 8 GB DDR4 |
-| **Storage** | 2 GB free space | 10 GB SSD |
-| **Display** | 1366×768 resolution | 1920×1080 or higher |
-| **Input** | Keyboard & Mouse | Touch screen optional |
+## Database Options
 
-### Operating Systems
+Smartposv7 supports two database options:
 
-| OS | Version | Status | Notes |
-|----|---------|--------|-------|
-| **Windows 10** | 21H2+ | ✅ **Recommended** | Full support |
-| **Windows 11** | All versions | ✅ **Supported** | Optimized |
-| **Windows 8.1** | Update 1 | ✅ **Supported** | Limited testing |
-| **Windows 7** | SP1 | ⚠️ **Minimum** | Basic compatibility |
-| **Windows Server** | 2016+ | ✅ **Supported** | Enterprise use |
+### Option 1: Microsoft SQL Server (Recommended for multi-user)
+- **Version**: SQL Server 2016 or newer
+- **Compatibility Level**: 2016 or higher must be set manually
+- **Installation**: Must be installed **before** Smartposv7
+- **Download**: [SQL Server from Microsoft](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 
-### Required Software
+### Option 2: SQLite (Simple setup)
+- **No installation required** - Embedded in application
+- **Automatic setup** - Smartposv7 creates and manages database
+- **Good for**: Single-user, testing, or small deployments
+- **Limitation**: Single-user access only
 
-| Software | Version | Download | Notes |
-|----------|---------|----------|-------|
-| **Microsoft SQL Server** | 2016+ | [Download](#sql-server) | Required for data storage |
-| **Microsoft .NET Framework** | 4.8+ | [Download](https://dotnet.microsoft.com/download/dotnet-framework) | Runtime dependencies |
-| **Visual C++ Redistributable** | 2015-2022 | [Download](https://aka.ms/vs/17/release/vc_redist.x64.exe) | C++ runtime |
-| **Qt Runtime** | Included | Built-in | No separate install needed |
+> **Note**: Choose SQL Server for multi-user environments or SQLite for simple single-user setups.
 
-## Database Requirements
+## Qt Framework Compatibility
 
-### SQL Server Specifications
+Smartposv7 is built on Qt framework with the following version requirements:
 
-```sql
--- Required SQL Server Configuration
--- Compatibility Level: 130 or higher (SQL Server 2016)
--- Collation: SQL_Latin1_General_CP1_CI_AS (recommended)
--- Authentication: Mixed Mode (SQL + Windows)
+- **Minimum Supported Version**: Qt 6.4.3
+- **Maximum Supported Version**: Qt 6.10
+- **Note**: The Qt runtime is included with Smartposv7 installation - no separate Qt installation is needed.
+
+## Application Modes
+
+Smartposv7 operates in three UI modes. Ensure your hardware supports your intended use:
+
+1. **Desktop Mode** (Default) - Standard monitor, keyboard, and mouse
+2. **Kiosk Mode** - Touch screen recommended for self-checkout
+3. **Mobile Mode** - Touch screen devices (Android/iOS support in future)
+
+## Pre-Installation Checklist
+
+### For SQL Server Setup:
+- [ ] Windows 7 or newer operating system
+- [ ] SQL Server 2016+ installed
+- [ ] SQL Server compatibility level set to 2016 or higher
+- [ ] SA password created and recorded
+
+### For SQLite Setup:
+- [ ] Windows 7 or newer operating system
+- [ ] No additional database installation needed
+
+## Next Steps
+
+Once prerequisites are met, proceed to:
+
+1. **[SQL Server Setup](/sql-server-setup)** - If using SQL Server (manual setup required)
+2. **[Installation Guide](/installation)** - Install Smartposv7 application
