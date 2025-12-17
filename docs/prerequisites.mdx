@@ -1,0 +1,55 @@
+
+---
+
+## **3. Prerequisites (`docs/prerequisites.mdx`)**
+
+```markdown
+---
+title: Prerequisites
+description: System requirements and pre-installation checklist
+---
+
+# Prerequisites for Smartposv7
+
+Before installing Smartposv7, ensure your system meets all requirements. This checklist will help you prepare for a successful installation.
+
+## System Requirements
+
+### Minimum Hardware
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| **Processor** | 2-core x64 CPU | 4-core Intel i5/Ryzen 5 |
+| **RAM** | 4 GB DDR3 | 8 GB DDR4 |
+| **Storage** | 2 GB free space | 10 GB SSD |
+| **Display** | 1366×768 resolution | 1920×1080 or higher |
+| **Input** | Keyboard & Mouse | Touch screen optional |
+
+### Operating Systems
+
+| OS | Version | Status | Notes |
+|----|---------|--------|-------|
+| **Windows 10** | 21H2+ | ✅ **Recommended** | Full support |
+| **Windows 11** | All versions | ✅ **Supported** | Optimized |
+| **Windows 8.1** | Update 1 | ✅ **Supported** | Limited testing |
+| **Windows 7** | SP1 | ⚠️ **Minimum** | Basic compatibility |
+| **Windows Server** | 2016+ | ✅ **Supported** | Enterprise use |
+
+### Required Software
+
+| Software | Version | Download | Notes |
+|----------|---------|----------|-------|
+| **Microsoft SQL Server** | 2016+ | [Download](#sql-server) | Required for data storage |
+| **Microsoft .NET Framework** | 4.8+ | [Download](https://dotnet.microsoft.com/download/dotnet-framework) | Runtime dependencies |
+| **Visual C++ Redistributable** | 2015-2022 | [Download](https://aka.ms/vs/17/release/vc_redist.x64.exe) | C++ runtime |
+| **Qt Runtime** | Included | Built-in | No separate install needed |
+
+## Database Requirements
+
+### SQL Server Specifications
+
+```sql
+-- Required SQL Server Configuration
+-- Compatibility Level: 130 or higher (SQL Server 2016)
+-- Collation: SQL_Latin1_General_CP1_CI_AS (recommended)
+-- Authentication: Mixed Mode (SQL + Windows)

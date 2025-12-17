@@ -1,0 +1,28 @@
+---
+title: Application Overview
+description: Smartposv7 features and architecture
+---
+
+# Smartposv7 Application Overview
+
+## What is Smartposv7?
+
+**Smartposv7** is a modern retail Point of Sale (POS) application built using **Qt framework with C++**, designed to provide flexible, reliable, and efficient sales management for retail businesses of all sizes.
+
+## Architecture
+
+```mermaid
+graph TB
+    A[Smartposv7 Application] --> B[Qt 6.4.3-6.10]
+    A --> C[C++ Backend]
+    A --> D[UI Layer]
+    
+    B --> E[Desktop Mode]
+    B --> F[Kiosk Mode]
+    B --> G[Mobile Mode]
+    
+    A --> H[Data Sources]
+    H --> I[MS SQL Server]
+    H --> J[Other Databases]
+    
+    I --> K[SQL Server 2016+]
