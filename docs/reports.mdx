@@ -1,0 +1,52 @@
+---
+title: Reports
+description: Print and configure reports in Smartposv7
+---
+
+# Reports
+
+Click the **Reports** button from the home screen to access and print various sales and inventory reports.
+
+## 🖨️ Report Printing Issues
+
+If reports appear **cut off or invisible**, you need to adjust the report width settings.
+
+### 🔧 Fix 1: MachineSetup.sqlite
+
+If the **report is completely invisible** or not displaying:
+
+1. Open `MachineSetup.sqlite` file
+2. Find the `reportWidth` property
+3. Update the value based on your printer/system:
+   ```ini
+   reportWidth = 80  # Adjust this number
+   ```
+4. Save and restart Smartposv7
+
+### 🔧 Fix 2: ServerSetup.sqlite  
+
+If the **report is printing but cut off**:
+
+1. Open `ServerSetup.sqlite` file
+2. Find the `ReportWidth` property
+3. Update to standard thermal printer width:
+   ```ini
+   ReportWidth = 43  # Standard for 80mm thermal paper
+   ```
+4. Save and refresh in home screen Smartposv7.
+
+## 📏 Common Width Settings
+
+| Paper Type | MachineSetup Width | ServerSetup Width |
+|------------|-------------------|-------------------|
+| **80mm Thermal** | 80 | 43 |
+| **58mm Thermal** | 58 | 35 |
+| **A4 Paper** | 210 | 80 |
+
+## 📄 Report Display
+
+![Report Screen](/assets/images/reports.png)
+
+*Above: Example of how reports appear in Smartposv7*
+
+**Ready to eod processing?** [Eod Processing →](/home)

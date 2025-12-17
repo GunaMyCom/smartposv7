@@ -1,7 +1,180 @@
 {
   "name": "Smartposv7",
   "description": "Retail POS System Documentation",
+  "repo": "your-username/smartposv7-docs",
+  "logo": {
+    "light": "/assets/images/logo.png",
+    "dark": "/assets/images/logo.png"
+  },
+  "favicon": "/favicon.ico",
   "colors": {
-    "primary": "#2563eb"
+    "primary": "#2563eb",
+    "light": "#f8fafc",
+    "dark": "#0f172a"
+  },
+  "topbarCtaButton": {
+    "name": "GitHub",
+    "url": "https://github.com/GunaMyCom/smartposv7"
+  },
+  "sidebar": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        {
+          "title": "Home",
+          "href": "/",
+          "icon": "home"
+        },
+        {
+          "title": "Prerequisites",
+          "href": "/prerequisites",
+          "icon": "check-circle"
+        },
+        {
+          "title": "SQL Server Setup",
+          "href": "/sql-server-setup", 
+          "icon": "database"
+        },
+        {
+          "title": "Installation",
+          "href": "/installation",
+          "icon": "download"
+        },
+         {
+          "title": "Simplified Installation",
+          "href": "/simplified-setup",
+          "icon": "download"
+        }
+      ]
+    },
+      {
+      "group": "Hardware Configuration",
+      "pages": [
+        {
+          "title": "Printer Settings",
+          "href": "/printer-settings",
+          "icon": "printer"
+        },
+        {
+          "title": "ECR Settings",
+          "href": "/ecr-settings",
+          "icon": "credit-card"
+        },
+        {
+          "title": "Second Display",
+          "href": "/second-display",
+          "icon": "monitor"
+        },
+        {
+          "title": "Voice Settings",
+          "href": "/voice-settings",
+          "icon": "volume-2"
+        }
+      ]
+    },
+    {
+      "group": "Configuration",
+      "pages": [
+        {
+          "title": "Initial Setup",
+          "href": "/initial-setup",
+          "icon": "settings"
+        },
+        {
+          "title": "Basic Server Setup",
+          "href": "/serversetup",
+          "icon": "server"
+        },
+        {
+          "title": "Basic Machine Setup",
+          "href": "/machinesetup",
+          "icon": "cpu"
+        },
+        {
+          "title": "UI Mode Configuration",
+          "href": "/ui-modes",
+          "icon": "layout"
+        }
+      ]
+    },
+    {
+      "group": "Daily Operations",
+      "pages": [
+        {
+          "title": "Launch Application",
+          "href": "/getting-started",
+          "icon": "play"
+        },
+        {
+          "title": "Master Download",
+          "href": "/master-download",
+          "icon": "cloud-download"
+        },
+        {
+          "title": "Shift Management",
+          "href": "/shift",
+          "icon": "clock"
+        },
+        {
+          "title": "Billing",
+          "href": "/billing",
+          "icon": "shopping-cart"
+        },
+        {
+          "title": "Reports",
+          "href": "/reports", 
+          "icon": "file-text"
+        },
+        {
+          "title": "EOD Sync",
+          "href": "/eod-sync",
+          "icon": "refresh-cw"
+        }
+      ]
+    },
+    {
+      "group": "Interface Guides",
+      "pages": [
+        {
+          "title": "Home Screen",
+          "href": "/home",
+          "icon": "monitor"
+        }
+      ]
+    },
+    {
+      "group": "Advanced (Future)",
+      "pages": [
+        {
+          "title": "Complete ServerSetup",
+          "href": "/serversetup-config",
+          "icon": "server",
+          "badge": "Coming Soon"
+        },
+        {
+          "title": "Complete MachineSetup",
+          "href": "/machinesetup-config",
+          "icon": "cpu",
+          "badge": "Coming Soon"
+        }
+      ]
+    }
+  ],
+  "footer": {
+    "text": "Smartposv7 © 2025. Built with Qt 6 and C++.",
+    "links": [
+      {
+        "text": "GitHub Repository",
+        "url": "https://github.com/GunaMyCom/smartposv7"
+      },
+      {
+        "text": "Report Issue",
+        "url": "https://github.com/GunaMyCom/smartposv7/issues"
+      },
+      {
+        "text": "Support",
+        "url": "mailto:support@example.com"
+      }
+    ]
   }
 }

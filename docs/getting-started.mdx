@@ -34,7 +34,7 @@ powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Des
 **Important**: The **first time** you launch Smartposv7, it may take **1-2 minutes** to start.
 
 **Why this happens:**
-![Description](/assets/images/login_flow.svg)
+![Login Flow](/assets/images/login_flow.svg)
 
 - **Windows Security** scans new applications
 - **Internal server** needs time to initialize
@@ -59,8 +59,8 @@ Before login, check if your connection is properly configured in `MachineSetup.s
 ```ini
 # For standalone installation (server inside app)
 ConnectionType = local
-PosServerIP = localhost
-PosServerPort = 9002
+ServerIP = localhost
+ServerPort = 9002
 
 # For central server installation
 ConnectionType = remote  
@@ -72,7 +72,7 @@ PosServerPort = 9002
 
 Look at the **top-right corner** of the login screen:
 
-![Login Screen Sample](https://example.com/smartposv7-login-sample.png)
+![Login Screen](/assets/images/login_screen.png)
 
 **Status Colors:**
 - **🟢 Green**: Server connected and ready
@@ -117,10 +117,11 @@ When status is **GREEN**, use these default credentials:
 ## ✅ What's Next
 
 After successful login, you'll see the **Home Screen** where you can:
+- Download Masters
 - Start new sales
-- Manage inventory
 - View reports
 - Configure settings
+- Sync Sales
 
 ---
 

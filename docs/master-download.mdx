@@ -1,0 +1,131 @@
+---
+title: Master Download Guide
+description: Download product and tax data for Smartposv7
+---
+
+# Master Download
+
+**Master Download** is the **first step** after installation. This downloads all necessary product, tax, and pricing data to your local system.
+
+![Master Download](/assets/images/master_download.png)
+
+## 📥 Why Download Masters?
+
+Masters contain:
+- **Product information** (items, prices, barcodes)
+- **Tax rates** and calculations
+- **Customer data** (if configured)
+- **Category structure** (groups, subgroups)
+
+## 🔧 Two Download Sources
+
+<Tabs groupId="download-source">
+<TabItem label="Back Office" value="backoffice">
+
+### Back Office Download
+Download from your local or company server.
+
+**Steps:**
+1. Click **"Back Office"** tab
+2. Click **"Start Download"** button
+3. Wait for completion
+
+**What downloads:**
+- All master data from configured back office
+- Complete dataset
+- No selection options
+
+**Best for:**
+- First-time setup
+- Complete data refresh
+- Offline environments
+
+</TabItem>
+<TabItem label="Cloud ERP" value="cloud-erp">
+
+### Cloud ERP Download
+Download from cloud services with selective options.
+
+**Steps:**
+1. Click **"Cloud ERP"** tab
+2. **Select** desired masters (checkboxes):
+   - [ ] `group_master` - Product categories
+   - [ ] `item_master` - Product items
+   - [ ] `price_mast` - Pricing information
+   - [ ] `subgroup_master` - Sub-categories
+   - [ ] `tax_master` - Tax rates and rules
+3. Click **"Start Download"** button
+4. Monitor progress
+
+**Best for:**
+- Partial updates
+- Cloud-connected systems
+- Specific data needs
+
+</TabItem>
+</Tabs>
+
+## 📊 Download Progress Monitoring
+
+During download, you'll see:
+
+**Progress Indicators:**
+```
+Downloading: item_master
+Progress: ██████████░░░░░░ 60%
+Items: 1250/2000
+Time remaining: 2 minutes
+```
+
+**Status Colors:**
+- **🟢 Green**: Download in progress
+- **🟡 Yellow**: Paused or slow connection
+- **🔴 Red**: Error occurred
+
+## ❌ Error Handling
+
+If download fails:
+
+**Common Errors:**
+1. **Connection Lost**
+   - Check internet/network
+   - Retry download
+
+2. **Server Not Responding**
+   - Verify server is running
+   - Check firewall settings
+
+3. **Insufficient Space**
+   - Clear disk space
+   - Restart download
+
+**Error Message Example:**
+```
+❌ Download Failed
+Error: Cannot connect to server
+Solution: Check network connection and retry
+```
+
+## ✅ Successful Download
+
+When complete:
+```
+✅ Download Complete!
+Total items: 5,230
+Time taken: 4 minutes 32 seconds
+Next: Open Shift to start billing
+```
+
+**Verification:**
+- Check product list in Billing section
+- Verify tax calculations work
+- Confirm categories are loaded
+
+## 🚀 Next Steps
+
+After successful master download:
+
+1. **[Open Shift →](/shift)** - Required before billing
+2. **[Start Billing →](/billing)** - Begin sales
+3. **[Verify Data →](/reports)** - Check downloaded information
+---

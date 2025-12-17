@@ -1,0 +1,152 @@
+---
+title: Shift Management Guide
+description: Open, manage, and close daily shifts in Smartposv7
+---
+
+# Shift Management
+
+**Shift Management** controls daily operations. You **must** open a shift before starting sales.
+
+## 🔍 Shift Status Check
+
+When you click **Shift** button, the system checks:
+
+![Shift](/assets/images/shift.png)
+
+## 🔓 Opening a New Shift
+
+If no shift is running:
+
+### Step 1: Authorization
+- System prompts for **User ID and Password**
+- Re-enter credentials for security
+- Click **"Open Shift"** button
+
+### Step 2: Shift Information
+After authorization:
+- Shift number is generated
+- Start time is recorded
+- User information is saved
+- Shift status becomes **"Open"**
+
+## 💰 Cash Management Options
+
+Once shift is open, two options appear:
+
+<Tabs groupId="cash-options">
+<TabItem label="Petty Cash (Cash Float)" value="petty-cash">
+
+### Add Starting Cash
+**Purpose**: Put initial cash in drawer for giving change.
+
+**Steps:**
+1. Click **"Post Petty Cash"** button
+2. Enter cash amount
+3. Select denomination breakdown (optional)
+4. Click **"Confirm"**
+
+**Example:**
+```
+Total Petty Cash: ₹5,000
+Breakdown:
+- ₹2,000 × 1 note
+- ₹500 × 4 notes  
+- ₹100 × 10 notes
+- ₹50 × 20 notes
+```
+
+**Best practice**: Add enough cash for daily change needs.
+
+</TabItem>
+<TabItem label="Cash Declaration" value="cash-declaration">
+
+### Declare Cash Denominations
+**Purpose**: Count and declare cash by denomination at shift start/end.
+
+**Prerequisite**: Must setup **CashDeclaration Master** first.
+
+**Steps:**
+1. Click **"Cash Declaration"** button
+2. System shows configured denominations
+3. Enter counts for each denomination
+4. System calculates total
+5. Click **"Save Declaration"**
+
+</TabItem>
+</Tabs>
+
+## 🏦 CashDeclaration Master Setup
+
+**Required before using Cash Declaration:**
+
+### Configure Denominations:
+
+| Denomination | Conversion Factor | Currency Code | Example Count | Value |
+|--------------|-------------------|---------------|---------------|-------|
+| **1** | 1.0 | AED | 50 coins | 50 AED |
+| **5** | 5.0 | AED | 20 notes | 100 AED |
+| **10** | 10.0 | AED | 15 notes | 150 AED |
+| **50** | 50.0 | AED | 10 notes | 500 AED |
+| **100** | 100.0 | AED | 5 notes | 500 AED |
+
+**For Indian Rupees (INR):**
+| Denomination | Conversion Factor | Currency Code |
+|--------------|-------------------|---------------|
+| **1** | 1.0 | INR |
+| **2** | 2.0 | INR |
+| **5** | 5.0 | INR |
+| **10** | 10.0 | INR |
+| **20** | 20.0 | INR |
+| **50** | 50.0 | INR |
+| **100** | 100.0 | INR |
+| **200** | 200.0 | INR |
+| **500** | 500.0 | INR |
+| **2000** | 2000.0 | INR |
+
+### How to Setup:
+1. Go to **Settings → Masters → Cash Declaration**
+2. Add each denomination with:
+   - Coinage type (string): "1", "10", "100", etc.
+   - Conversion factor (double): Same as denomination
+   - Currency code (string): "AED" or "INR"
+3. Save configuration
+
+## 🔒 Shift Security Features
+
+- **One shift per terminal** at a time
+- **User authentication** required to open
+- **Automatic time tracking**
+- **Cash accountability**
+- **Audit trail** of all actions
+
+## 📊 Shift Reports
+
+During shift, you can view:
+- **Current shift sales**
+- **Cash in drawer**
+- **Transaction count**
+- **Opening/Closing time**
+
+## 🔚 Closing a Shift
+
+To end daily operations:
+
+1. Click **"Close Shift"** button
+2. Perform **Cash Declaration** (count all cash)
+3. Enter **Closing Cash Amount**
+4. System calculates **Difference**
+5. Confirm closure
+6. Shift status becomes **"Closed"**
+
+## ⚠️ Important Notes
+
+1. **No billing possible** without open shift
+2. **Shift must be closed** before EOD Sync
+3. **One shift per day** per terminal
+4. **Cash declaration** is mandatory at closure
+5. **All data saved** for reporting
+
+---
+
+**Next Action**: After opening shift, proceed to [Billing →](/billing)
+```

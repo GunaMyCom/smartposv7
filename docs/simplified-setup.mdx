@@ -1,0 +1,70 @@
+### **Phase 1: Prerequisites**
+1. **Windows 7 or newer** operating system
+2. **For SQL Server users only**: Download SQL Server 2016+ from Microsoft
+
+### **Phase 2: Installation**
+1. **Download library files** (.zip) → Extract to `smartposv7/` folder
+2. **Download application** (.exe) → Place in same `smartposv7/` folder
+3. **For global access** (recommended CLI):
+   ```cmd
+   setx SMARTPOSV7_LIB "C:\path\to\smartposv7\" /M
+   setx PATH "%PATH%;%SMARTPOSV7_LIB%" /M
+   ```
+
+### **Phase 3: Initial Configuration** **(UPDATED WITH COMPLETE SETTINGS)**
+**Run Smartposv7.exe once** → Creates all config files
+
+**Configure ServerSetup.sqlite:**
+```ini
+ClientId=20130                      # Your company ID (MANDATORY)
+loc_id=001                          # Store location (MANDATORY)
+ServerType=RETAIL                   # Must be RETAIL (MANDATORY)
+DriverType=QSQLITE                  # QSQLITE or QODBC
+BackOfficeDownloadUrl=              # Can be empty (MANDATORY field)
+MasterDownloadFrom=cloud-erp        # cloud-erp, inv-1.8, or inv-v4 (MANDATORY)
+SalesUploadSink=cloud-erp           # cloud-erp, inv-1.8, or inv-v4 (MANDATORY)
+SalesUploadPort=8814/WEBCLOUD_TESTSRV/api/v1/opm/SalesUploadToOpm
+SalesUploadServerIP=https://web.mycomsys.com
+AutomaticalSalesSyncing=true        # true or false
+CoutrCloseDay=1
+CoutrCloseHour=1
+CoutrCloseMin=0
+ReportWidth=43
+```
+
+**Configure MachineSetup.sqlite:**
+```ini
+ClientCode=21103                    # Your client code (MANDATORY)
+loc_id=001                          # MUST match ServerSetup value (MANDATORY)
+PosID=12                            # Terminal number (MANDATORY)
+Tax_Enable=true                     # Enable tax (MANDATORY)
+taxType=IN                          # IN (Inclusive) or EX (Exclusive) (MANDATORY)
+ApplicationType=RETAIL-POS          # RETAIL-POS or RESTPOS (MANDATORY)
+SubApplicationType=SMARTPOSV7       # SMARTPOSV7 or SMARTPOSV5 (MANDATORY)
+UIMode=RETAIL-POS                   # RETAIL-POS or RETAIL-SELF-CHECKOUT (MANDATORY)
+DownloadMasters=["group_master","item_master","price_mast","subgroup_master","tax_master"]
+```
+
+### **Phase 4: First Launch**
+1. **Launch application** (first time takes longer due to Windows security)
+2. **Check top-right status** → Must be GREEN (🟢)
+3. **Login** with: Username `demo`, Password `demo`
+
+### **Phase 5: Data Setup**
+1. **Click Master Download** button
+2. **Choose source**: Back Office (complete) or Cloud ERP (selective)
+3. **Download** product, tax, and pricing data
+4. **Verify** data loaded successfully
+
+### **Phase 6: Start Operations**
+1. **Open Shift** (REQUIRED before any sales)
+   - Re-enter credentials
+   - Add petty cash if needed
+2. **Click Billing** → Start first sale
+3. **Scan items** → Process payment → Print receipt
+
+### **Phase 7: Daily Routine**
+1. **Open shift** each morning
+2. **Process sales** throughout day
+3. **Close shift** at end of day
+4. **EOD Sync** to upload sales data

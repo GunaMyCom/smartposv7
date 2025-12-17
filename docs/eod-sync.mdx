@@ -1,0 +1,97 @@
+---
+title: EOD Sync
+description: End of Day sales synchronization and processing
+---
+
+# EOD Sync
+
+Click the **EOD Sync** button from the home screen to process daily sales synchronization.
+
+## 📅 Pending EOD Processing
+
+When you open EOD Sync, the system shows:
+
+```
+Pending EOD Dates to Process:
+• 2024-01-15
+• 2024-01-16
+• 2024-01-17
+```
+
+## 🔄 Processing EOD
+
+To process pending EOD:
+
+1. Click **"Process EOD"** button
+2. System immediately processes the oldest pending date
+3. Sales data is synced based on your configuration
+4. EOD report is generated
+
+## ⚙️ Sync Configuration Settings
+
+These settings in `ServerSetup.sqlite` control EOD sync behavior:
+
+| Setting | Value | Purpose |
+|---------|-------|---------|
+| **SalesUploadPort** | `8814/WEBCLOUD_TESTSRV/api/v1/opm/SalesUploadToOpm` | API endpoint for sales upload |
+| **SalesUploadServerIP** | `https://web.mycomsys.com` | Server address for syncing |
+| **SalesUploadSink** | `cloud-erp` | Destination system (Options: `cloud-erp`, `inv-1.8`, `inv-v4`) |
+| **AutomaticalSalesSyncing** | `true` or `false` | Enable/disable auto sync |
+
+### Sync Behavior Based on Settings:
+
+**If `AutomaticalSalesSyncing = true`:**
+```
+EOD Processed → Automatic Sync → Back Office/Cloud ERP
+```
+
+**If `AutomaticalSalesSyncing = false`:**
+```
+EOD Processed → Manual Sync Required → Click "Sync Now" button
+```
+
+## 📊 EOD Report Generation
+
+After processing EOD, the system generates:
+
+**End of Day Sales Report** containing:
+- Total sales amount
+- Transaction count
+- Tax summary
+- Payment method breakdown
+- Shift closure details
+
+## ⚠️ IMPORTANT PREREQUISITE
+
+**⚠️ You MUST close the shift before processing EOD.**
+
+### Correct Order:
+1. **[Close Shift →](/shift)** - Complete daily cash handling
+2. **Process EOD** - Sync sales data
+3. **Generate Report** - View EOD summary
+
+### Error Message if Shift Not Closed:
+```
+❌ Cannot Process EOD
+Error: Shift is still open
+Solution: Please close the shift first from Shift menu
+```
+
+## 📋 EOD Sync Process Flow
+![Eod Process and Sync Flow](/assets/images/eod_flow.svg)
+## 🖼️ EOD Sync Screen
+
+![EOD Sync Screen](/assets/images/eod_process.png)
+
+*Above: EOD Sync interface showing pending dates and process button*
+
+## 🔧 Troubleshooting
+
+**Problem**: EOD button is disabled  
+**Solution**: Check if shift is closed
+
+**Problem**: Sync fails  
+**Solution**: Verify `SalesUploadServerIP` and network connection
+
+**Problem**: No pending EOD dates  
+**Solution**: All EODs already processed or no sales data
