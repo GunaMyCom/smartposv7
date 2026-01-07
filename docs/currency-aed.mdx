@@ -1,0 +1,277 @@
+# Dirham Symbol Integration Documentation
+
+## Overview
+Implementation of UAE Dirham (AED) symbol using multiple fallback mechanisms for maximum compatibility.
+
+## Reference Documentation
+- **Adding Dirham Symbol to Fonts**: https://medium.com/@dagrawal/adding-the-new-dirham-symbol-to-any-font-9a4db9a50873
+- **Current Unicode for Dirham**: U+D7FF (Private Use Area in DMSans font)
+
+## Behavior Matrix
+
+| Template Syntax | Primary Action | Fallback 1 | Fallback 2 | Final Fallback |
+|-----------------|----------------|------------|------------|----------------|
+| `AED 100.00` | Auto-convert to Unicode | Use DMSans font | Use image | Print "AED" |
+| `{{ print_currency("AED") }}` | Print image | Use DMSans font | Use Unicode | Print "AED" |
+| `{{ print_currency("AED", size) }}` | Print sized image | Use DMSans font | Use Unicode | Print "AED" |
+
+## Implementation Details
+
+### 1. Automatic Text Conversion
+**Syntax**: `AED 100.00` (plain text in template)
+**Behavior**: Automatically converts to symbol during printing
+**Fallback Order**: DMSans font → image → text "AED"
+
+### 2. Image-Based Printing (Recommended)
+**Syntax**: `{{ print_currency("AED") }}`
+**Primary**: Prints `currency.bmp` image
+**Fallback Order**: Image → DMSans font → Unicode → text "AED"
+
+**With Size Control**: `{{ print_currency("AED", 60) }}`
+- Controls image height in pixels
+- Default size: 50 pixels
+- Falls back to font/text if image fails
+
+### 3. Template Filter Implementation
+```cpp
+registerFilter("print_currency", [](inja::Arguments& args) {
+    std::string currencyCode = args.at(0)->get<std::string>();
+    
+    if (args.size() > 1) {
+        int size = args.at(1)->get<int>();
+        return "{{CURRENCY:" + currencyCode + ":" + std::to_string(size) + "}}";
+    } else {
+        return "{{CURRENCY:" + currencyCode + "}}";
+    }
+}, 1, 2);
+```
+
+## Fallback Priority (All Cases)
+
+### Primary (if configured):
+1. **Image Printing** (`currency.bmp`) - for `{{ print_currency("AED") }}`
+2. **DMSans Font** (Unicode U+D7FF) - for automatic conversion
+
+### Secondary (if primary fails):
+3. **Text "AED"** - ultimate fallback
+
+## Examples
+
+### In Templates:
+```jinja
+# Automatic conversion from text
+Subtotal: AED 85.50
+Tax: AED 12.83
+
+# Image-based with size
+TOTAL: {{ print_currency("AED", 60) }} 98.33
+
+# Default image size
+Amount Due: {{ print_currency("AED") }} 98.33
+
+# In tables
+{{ ljust("Item 1", 20) }}{{ print_currency("AED") }} 50.00
+{{ ljust("Item 2", 20) }}{{ print_currency("AED", 30) }} 25.00
+{{ ljust("Total", 20) }}{{ print_currency("AED", 40) }} 75.00
+```
+
+## File Requirements
+
+### Image File:
+- **Location**: Application root directory
+- **Name**: `currency.bmp` (exact)
+- **Format**: 1-bit monochrome BMP
+- **Default Size**: 50 pixels height (adjustable via size parameter)
+
+### Font File:
+- **Name**: `DMSans.ttf`
+- **Unicode**: U+D7FF (Dirham symbol)
+- **Location**: Application bundle
+
+## Configuration
+- Set `currencyCode = "AED"` in machine setup
+- No additional configuration needed
+
+## Adding New Currencies
+1. Replace `currency.bmp` with new symbol
+2. Add symbol to DMSans.ttf at new Unicode point
+3. Update `currencyCode` in machine setup
+
+## Important Notes
+1. **Unicode U+D7FF** is used in DMSans font
+2. **Direct Unicode in templates won't work** - use text "AED" or filter
+3. **Size parameter** only affects image printing
+4. **All methods fall back to text "AED"** if everything fails
+
+---
+
+# Developer Integration Guide
+
+## Prerequisites
+1. Qt 5.15+ or Qt 6.0+
+2. Inja template engine integrated
+3. Existing receipt printing system (DriverPrint)
+
+## Step-by-Step Integration
+
+### Step 1: Add DMSans Font with Dirham Symbol
+1. Download official Dirham vector symbol
+2. Open `DMSans-Regular.ttf` in FontForge
+3. Navigate to **Private Use Area** (U+E800 - U+F8FF)
+4. Select empty slot (recommended: **U+D7FF**)
+5. **File → Import → SVG** (choose Dirham vector)
+6. **Generate → TrueType** → Save as `DMSans.ttf`
+7. Add to Qt resource system:
+```xml
+<qresource prefix="/fonts">
+    <file>DMSans.ttf</file>
+</qresource>
+```
+
+### Step 2: Load Font at Application Startup
+```cpp
+// In main.cpp or application initialization
+#include <QFontDatabase>
+
+void loadCurrencyFont() {
+    int fontId = QFontDatabase::addApplicationFont(":/fonts/DMSans.ttf");
+    if (fontId != -1) {
+        qDebug() << "DMSans font loaded successfully";
+    }
+}
+```
+
+### Step 3: Add Template Filter
+Add to your existing Inja environment setup:
+```cpp
+registerFilter("print_currency", [](inja::Arguments& args) {
+    std::string currencyCode = args.at(0)->get<std::string>();
+    
+    if (args.size() > 1) {
+        int size = args.at(1)->get<int>();
+        return "{{CURRENCY:" + currencyCode + ":" + std::to_string(size) + "}}";
+    } else {
+        return "{{CURRENCY:" + currencyCode + "}}";
+    }
+}, 1, 2);
+```
+
+### Step 4: Prepare Currency Image
+1. Create 1-bit monochrome BMP image
+2. Recommended dimensions: 50×30 pixels
+3. Save as `currency.bmp`
+4. Place in application root directory
+
+### Step 5: Update DriverPrint (if needed)
+Ensure your DriverPrint handles:
+1. `{{CURRENCY:AED}}` placeholders
+2. `{{CURRENCY:AED:size}}` with size parameter
+3. Automatic "AED" text conversion
+
+### Step 6: Configuration
+In machine settings:
+```sql
+   INSERT INTO AppSettings(currencyCode) VALUE ("AED");
+```
+
+### Step 7: Update Templates
+Replace old currency references:
+```jinja
+# OLD
+Total: $100.00
+
+# NEW (automatic conversion)
+Total: AED 100.00
+
+# NEW (image-based with size control)
+Total: {{ print_currency("AED", 60) }} 100.00
+```
+
+## Testing Procedure
+
+### Test 1: Font Loading
+```cpp
+QStringList fonts = QFontDatabase::families();
+bool hasDMSans = false;
+for (const QString &font : fonts) {
+    if (font.contains("DMSans", Qt::CaseInsensitive)) {
+        hasDMSans = true;
+        break;
+    }
+}
+qDebug() << "DMSans loaded:" << hasDMSans;
+```
+
+### Test 2: Image Existence
+```cpp
+bool hasCurrencyImage = QFile::exists("currency.bmp");
+qDebug() << "currency.bmp exists:" << hasCurrencyImage;
+```
+
+### Test 3: Template Rendering
+```cpp
+json data;
+std::string result = inja::render("Amount: {{ print_currency('AED') }} 100.00", data);
+```
+
+### Test 4: End-to-End Test
+1. Set `currencyCode = "AED"` in machine setup
+2. Print test receipt with:
+   - Plain "AED" text
+   - `{{ print_currency("AED") }}`
+   - `{{ print_currency("AED", 40) }}`
+3. Verify all three work correctly
+
+## Common Integration Issues
+
+### Issue 1: Symbol Not Showing
+**Solution**: 
+1. Verify DMSans.ttf contains symbol at U+D7FF
+2. Check font is loaded in QFontDatabase
+3. Ensure application has font embedding enabled
+
+### Issue 2: Image Not Printing
+**Solution**:
+1. Confirm `currency.bmp` is 1-bit monochrome
+2. Check file is in application root directory
+3. Verify DriverPrint image loading logic
+
+### Issue 3: Template Placeholder Not Replaced
+**Solution**:
+1. Check Inja filter is registered
+2. Verify template syntax is correct
+3. Ensure DriverPrint processes `{{CURRENCY:}}` placeholders
+
+### Regular Checks:
+1. Font loads on application startup
+2. `currency.bmp` exists in deployment
+3. Template filters work correctly
+4. All fallback paths function
+
+### Update Procedure:
+1. **Update symbol design**: Replace `currency.bmp`
+2. **Update font**: Replace `DMSans.ttf` in resources
+3. **Add new currency**: Update templates and configuration
+
+## Performance Considerations
+- Font rendering is fastest (use for UI)
+- Image printing has moderate overhead
+- 1-bit BMP images are memory efficient
+- Template processing adds minimal latency
+
+## File Structure Summary
+```
+application/
+├── assets/fonts/                 
+│            └── DMSans.ttf        
+├── currency.bmp          
+└── MachineSetup.sqlite
+```
+
+## Rollback Procedure
+If issues occur:
+1. Remove `currency.bmp` → falls back to text
+2. Remove DMSans.ttf → falls back to image/text
+3. Templates continue working with "AED" text
+
+---

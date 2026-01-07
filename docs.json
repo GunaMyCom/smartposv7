@@ -133,6 +133,16 @@
       ]
     },
     {
+      "group": "Currency Symbol Setup",
+      "pages": [
+        {
+          "title": "Dhirham (AED)",
+          "href": "/currency-aed",
+          "icon": "currency"
+        }
+      ]
+    },
+    {
       "group": "Interface Guides",
       "pages": [
         {
@@ -173,7 +183,7 @@
       },
       {
         "text": "Support",
-        "url": "mailto:support@example.com"
+        "url": "mailto:support@mycomtechno.com"
       }
     ]
   }
