@@ -94,6 +94,11 @@
           "title": "UI Mode Configuration",
           "href": "/ui-modes",
           "icon": "layout"
+        },
+        {
+          "title": "Advanced UI Mode Configuration",
+          "href": "/advanced-ui-modes",
+          "icon": "layout"
         }
       ]
     },

@@ -1,0 +1,125 @@
+# Application Configuration Guide
+
+This document explains how **Machine Setup** and **Server Setup** should be configured for different application modes. It helps ensure the UI behavior and backend server logic work consistently across Retail, Restaurant (RESTPOS), and Self‑Checkout deployments.
+
+---
+
+## Key Concepts
+
+### Machine Setup
+Controls **UI behavior and application mode** on the device.
+
+- **ApplicationType** – Defines the core business domain (RETAIL or RESTPOS)
+- **UIMode** – Defines how the UI behaves (Standard POS or Self‑Checkout)
+
+### Server Setup
+Controls **server‑side logic, APIs, and data handling**.
+
+- **Server Setup** – Determines which business rules and services are enabled
+- **ServerType = BOTH** – Enables support for both Retail and Restaurant logic from a single server
+
+---
+
+## Configuration Scenarios
+
+### 1. Retail Application
+
+**Machine Setup**
+- ApplicationType = `RETAIL`
+- UIMode = `RETAIL`
+
+**Server Setup**
+- Server Setup = `RETAIL`
+
+**Use Case**
+- Standard retail POS billing
+- Item‑based sales, barcode scanning, retail workflows
+
+---
+
+### 2. Restaurant POS (RESTPOS)
+
+**Machine Setup**
+- ApplicationType = `RESTPOS`
+- UIMode = `RESTPOS`
+
+**Server Setup**
+- Server Setup = `RESTPOS`
+
+**Use Case**
+- Table management
+- Kitchen order tickets (KOT)
+- Restaurant‑specific billing
+
+---
+
+### 3. Restaurant Self‑Checkout
+
+**Machine Setup**
+- ApplicationType = `RESTPOS`
+- UIMode = `RESTAURANT‑SELF‑CHECKOUT`
+
+**Server Setup**
+- Server Setup = `RESTPOS`
+
+**Use Case**
+- Customer‑operated ordering terminals
+- Minimal UI with restaurant workflow
+- Orders routed to kitchen automatically
+
+---
+
+### 4. Retail Self‑Checkout
+
+**Machine Setup**
+- ApplicationType = `RETAIL`
+- UIMode = `RETAIL‑SELF‑CHECKOUT`
+
+**Server Setup**
+- Server Setup = `RETAIL`
+
+**Use Case**
+- Customer‑operated checkout kiosks
+- Barcode scanning and payment without cashier
+
+---
+
+### 5. Combined Retail + Restaurant Application
+
+**Machine Setup**
+- UI behavior changes dynamically based on Machine Setup values
+- ApplicationType and UIMode decide which UI is loaded
+
+**Server Setup**
+- ServerType = `BOTH`
+
+**Use Case**
+- Single backend supporting both Retail and Restaurant
+- Multiple POS types connected to one centralized server
+- Ideal for hybrid businesses or franchises
+
+---
+
+## Important Notes
+
+- **UI behavior is always controlled by Machine Setup**
+- **Business logic and API behavior are controlled by Server Setup**
+- Self‑Checkout modes do not require a separate server type
+- Using `ServerType = BOTH` avoids maintaining multiple servers
+
+---
+
+## Summary Table
+
+| Scenario | ApplicationType | UIMode | Server Setup |
+|--------|----------------|--------|--------------|
+| Retail POS | RETAIL | RETAIL | RETAIL |
+| Restaurant POS | RESTPOS | RESTPOS | RESTPOS |
+| Restaurant Self‑Checkout | RESTPOS | RESTAURANT‑SELF‑CHECKOUT | RESTPOS |
+| Retail Self‑Checkout | RETAIL | RETAIL‑SELF‑CHECKOUT | RETAIL |
+| Combined Mode | Dynamic | Dynamic | BOTH |
+
+---
+
+This configuration ensures **flexibility, scalability, and consistent behavior** across all POS deployments.
+
